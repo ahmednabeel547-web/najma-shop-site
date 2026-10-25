@@ -13,58 +13,133 @@
   h2{margin:24px 16px 8px;color:#b5527f}
   .products{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 16px}
   .card{background:#fff;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.1)}
-  .img{background:#eee;height:100px;border-radius:8px;margin-bottom:8px}
+  .img{background:#eee center/cover no-repeat;height:110px;border-radius:8px;margin-bottom:8px}
   .card h3{font-size:15px;margin:6px 0}
   .price{color:#b5527f;font-weight:bold;margin:4px 0}
   .btn{display:inline-block;margin-top:6px;background:#25d366;color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;font-size:14px}
   footer{text-align:center;padding:24px;color:#777}
+  .bar{background:#222;color:#fff;padding:10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .adm{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin:4px 16px}
+  .card .adm{margin:6px 0 0}
+  .bar button,.adm button{border:0;border-radius:6px;padding:7px 10px;background:#b5527f;color:#fff;font-size:13px}
+  button.red{background:#c0392b!important}
+  #ov{position:fixed;inset:0;background:#fff;z-index:9;padding:12px;display:flex;flex-direction:column;gap:8px}
+  #ov[hidden]{display:none}
+  #out{flex:1;width:100%;box-sizing:border-box;font-size:12px}
+  #ov button{padding:12px;font-size:16px;border:0;border-radius:8px;background:#b5527f;color:#fff}
 </style>
 </head>
 <body>
-<header>
-  <h1>متجر نجمة</h1>
-  <p>موبايلات • سماعات • كفرات • لزقات</p>
-</header>
+<header><h1 id="shop"></h1><p id="sub"></p></header>
+<div id="bar"></div>
+<nav id="nav"></nav>
+<main id="main"></main>
+<footer id="foot"></footer>
+<input type="file" id="file" accept="image/*" hidden>
+<div id="ov" hidden>
+  <b>انسخ الملف كامل ثم الصقه في GitHub</b>
+  <textarea id="out" readonly></textarea>
+  <button id="cp">نسخ الكل</button>
+  <button id="cl">إغلاق</button>
+</div>
 
-<nav>
-  <a href="#mobiles">موبايلات</a>
-  <a href="#headphones">سماعات</a>
-  <a href="#cases">كفرات</a>
-  <a href="#screens">لزقات</a>
-</nav>
-
-<h2 id="mobiles">الموبايلات</h2>
-<section class="products">
-  <div class="card" data-name="موبايل 1"><div class="img"></div><h3>موبايل 1</h3><p class="price">000,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
-  <div class="card" data-name="موبايل 2"><div class="img"></div><h3>موبايل 2</h3><p class="price">000,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
-</section>
-
-<h2 id="headphones">السماعات</h2>
-<section class="products">
-  <div class="card" data-name="سماعة 1"><div class="img"></div><h3>سماعة 1</h3><p class="price">00,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
-  <div class="card" data-name="سماعة 2"><div class="img"></div><h3>سماعة 2</h3><p class="price">00,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
-</section>
-
-<h2 id="cases">الكفرات</h2>
-<section class="products">
-  <div class="card" data-name="كفر 1"><div class="img"></div><h3>كفر 1</h3><p class="price">0,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
-  <div class="card" data-name="كفر 2"><div class="img"></div><h3>كفر 2</h3><p class="price">0,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
-</section>
-
-<h2 id="screens">اللزقات</h2>
-<section class="products">
-  <div class="card" data-name="لزقة 1"><div class="img"></div><h3>لزقة 1</h3><p class="price">0,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
-  <div class="card" data-name="لزقة 2"><div class="img"></div><h3>لزقة 2</h3><p class="price">0,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
-</section>
-
-<footer>© متجر نجمة • للطلب والاستفسار واتساب: 07740866294</footer>
+<script id="data" type="application/json">{"shop":"متجر نجمة","phone":"07740866294","wa":"9647740866294","cats":[{"id":"mobiles","name":"الموبايلات","items":[{"id":"a1","name":"موبايل تجريبي","price":"500000","img":""}]},{"id":"headphones","name":"السماعات","items":[{"id":"a2","name":"سماعة تجريبية","price":"25000","img":""}]},{"id":"cases","name":"الكفرات","items":[{"id":"a3","name":"كفر تجريبي","price":"5000","img":""}]},{"id":"screens","name":"اللزقات","items":[{"id":"a4","name":"لزقة تجريبية","price":"3000","img":""}]}]}</script>
 
 <script>
-  var phone = "9647740866294";
-  document.querySelectorAll(".card").forEach(function (c) {
-    var msg = "مرحباً، أريد أطلب: " + c.dataset.name;
-    c.querySelector(".btn").href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+var D = JSON.parse(document.getElementById('data').textContent);
+var admin = /[?&]admin/.test(location.search);
+var cur = null;
+if (admin) { try { var s = localStorage.getItem('draft'); if (s) D = JSON.parse(s); } catch (e) {} }
+
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function uid(){return 'i'+Date.now()+Math.floor(Math.random()*1000)}
+function fmt(p){var n=Number(String(p).replace(/[^\d.]/g,''));return n?n.toLocaleString('en-US')+' د.ع':''}
+function save(){
+  if (admin) { try { localStorage.setItem('draft', JSON.stringify(D)); } catch (e) { alert('الذاكرة ممتلئة، احذف بعض الصور'); } }
+  render();
+}
+
+function render(){
+  document.getElementById('shop').textContent = D.shop;
+  document.getElementById('sub').textContent = D.cats.map(function(c){return c.name}).join(' • ');
+  document.getElementById('foot').textContent = '© ' + D.shop + ' • واتساب: ' + D.phone;
+  document.getElementById('bar').innerHTML = admin
+    ? '<div class="bar"><b>وضع الإدارة</b><button onclick="addCat()">+ قسم</button><button onclick="exportFile()">نسخ للنشر</button><button class="red" onclick="resetDraft()">إلغاء التعديلات</button></div>' : '';
+  var n = '', h = '';
+  D.cats.forEach(function(c, ci){
+    n += '<a href="#'+c.id+'">'+esc(c.name)+'</a>';
+    h += '<h2 id="'+c.id+'">'+esc(c.name)+'</h2>';
+    if (admin) h += '<div class="adm"><button onclick="renameCat('+ci+')">تعديل الاسم</button><button onclick="addItem('+ci+')">+ منتج</button><button class="red" onclick="delCat('+ci+')">حذف القسم</button></div>';
+    h += '<section class="products">';
+    c.items.forEach(function(it, ii){
+      h += '<div class="card"><div class="img"'+(it.img?' style="background-image:url(\''+it.img+'\')"':'')+'></div><h3>'+esc(it.name)+'</h3><p class="price">'+esc(fmt(it.price))+'</p>';
+      if (admin) h += '<div class="adm"><button onclick="pic('+ci+','+ii+')">صورة</button><button onclick="editItem('+ci+','+ii+')">تعديل</button><button class="red" onclick="delItem('+ci+','+ii+')">حذف</button></div>';
+      else h += '<a class="btn" href="https://wa.me/'+D.wa+'?text='+encodeURIComponent('مرحباً، أريد أطلب: '+it.name+' '+fmt(it.price))+'">اطلب الآن</a>';
+      h += '</div>';
+    });
+    h += '</section>';
   });
+  document.getElementById('nav').innerHTML = n;
+  document.getElementById('main').innerHTML = h;
+}
+
+function addCat(){var t=prompt('اسم القسم الجديد');if(t){D.cats.push({id:uid(),name:t,items:[]});save()}}
+function renameCat(ci){var t=prompt('اسم القسم',D.cats[ci].name);if(t){D.cats[ci].name=t;save()}}
+function delCat(ci){if(confirm('حذف القسم مع كل منتجاته؟')){D.cats.splice(ci,1);save()}}
+function addItem(ci){
+  var t=prompt('اسم المنتج');if(!t)return;
+  var p=prompt('السعر (أرقام فقط)')||'';
+  D.cats[ci].items.push({id:uid(),name:t,price:p,img:''});save();
+}
+function editItem(ci,ii){
+  var it=D.cats[ci].items[ii];
+  var t=prompt('اسم المنتج',it.name);if(t)it.name=t;
+  var p=prompt('السعر (أرقام فقط)',it.price);if(p!==null)it.price=p;
+  save();
+}
+function delItem(ci,ii){if(confirm('حذف المنتج؟')){D.cats[ci].items.splice(ii,1);save()}}
+function pic(ci,ii){cur=[ci,ii];document.getElementById('file').click()}
+
+document.getElementById('file').onchange = function(e){
+  var f = e.target.files[0]; if (!f || !cur) return;
+  var r = new FileReader();
+  r.onload = function(){
+    var im = new Image();
+    im.onload = function(){
+      var m = 600, k = Math.min(1, m/Math.max(im.width, im.height));
+      var cv = document.createElement('canvas');
+      cv.width = Math.round(im.width*k); cv.height = Math.round(im.height*k);
+      cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height);
+      D.cats[cur[0]].items[cur[1]].img = cv.toDataURL('image/jpeg', 0.7);
+      save();
+    };
+    im.src = r.result;
+  };
+  r.readAsDataURL(f);
+  e.target.value = '';
+};
+
+function resetDraft(){
+  if (confirm('إلغاء كل التعديلات غير المنشورة؟')) { try { localStorage.removeItem('draft'); } catch (e) {} location.reload(); }
+}
+
+function exportFile(){
+  fetch(location.pathname, {cache:'no-store'}).then(function(r){return r.text()}).then(function(t){
+    var json = JSON.stringify(D).replace(/</g, '\\u003c');
+    var out = t.replace(/(<script id="data" type="application\/json">)[\s\S]*?(<\/script>)/, function(m, a, b){return a + json + b});
+    document.getElementById('out').value = out;
+    document.getElementById('ov').hidden = false;
+  }).catch(function(){alert('تعذر تجهيز الملف، حدّث الصفحة وحاول مرة ثانية')});
+}
+document.getElementById('cp').onclick = function(){
+  var o = document.getElementById('out');
+  o.select(); o.setSelectionRange(0, 99999999);
+  if (navigator.clipboard) navigator.clipboard.writeText(o.value).then(function(){alert('تم النسخ')}, function(){document.execCommand('copy');alert('تم النسخ')});
+  else { document.execCommand('copy'); alert('تم النسخ'); }
+};
+document.getElementById('cl').onclick = function(){document.getElementById('ov').hidden = true};
+
+render();
 </script>
 </body>
 </html>
