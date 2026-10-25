@@ -1,48 +1,70 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>متجر نجمة</title>
-  <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #faf7f2; color: #222; }
-    header { background: #b5527f; color: #fff; text-align: center; padding: 40px 16px; }
-    header h1 { margin: 0 0 8px; }
-    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; padding: 20px; }
-    .card { background: #fff; border-radius: 12px; padding: 16px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,.1); }
-    .card .img { background: #eee; height: 120px; border-radius: 8px; margin-bottom: 10px; }
-    .price { color: #b5527f; font-weight: bold; }
-    a.btn { display: inline-block; margin-top: 8px; background: #25d366; color: #fff; padding: 8px 14px; border-radius: 8px; text-decoration: none; }
-    footer { text-align: center; padding: 20px; color: #777; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>متجر نجمة</title>
+<style>
+  body{margin:0;font-family:Arial,sans-serif;background:#faf7f2;color:#222}
+  header{background:#b5527f;color:#fff;text-align:center;padding:36px 16px}
+  header h1{margin:0 0 8px}
+  nav{display:flex;gap:8px;overflow-x:auto;padding:12px;background:#fff;position:sticky;top:0;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+  nav a{white-space:nowrap;background:#f3e3ec;color:#b5527f;padding:8px 14px;border-radius:20px;text-decoration:none;font-weight:bold}
+  h2{margin:24px 16px 8px;color:#b5527f}
+  .products{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 16px}
+  .card{background:#fff;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+  .img{background:#eee;height:100px;border-radius:8px;margin-bottom:8px}
+  .card h3{font-size:15px;margin:6px 0}
+  .price{color:#b5527f;font-weight:bold;margin:4px 0}
+  .btn{display:inline-block;margin-top:6px;background:#25d366;color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;font-size:14px}
+  footer{text-align:center;padding:24px;color:#777}
+</style>
 </head>
 <body>
-  <header>
-    <h1>متجر نجمة</h1>
-    <p>أهلاً بكم، تسوقوا أجمل المنتجات</p>
-  </header>
+<header>
+  <h1>متجر نجمة</h1>
+  <p>موبايلات • سماعات • كفرات • لزقات</p>
+</header>
 
-  <section class="products">
-    <div class="card">
-      <div class="img"></div>
-      <h3>منتج 1</h3>
-      <p class="price">50 ر.س</p>
-      <a class="btn" href="https://wa.me/966500000000">اطلب الآن</a>
-    </div>
-    <div class="card">
-      <div class="img"></div>
-      <h3>منتج 2</h3>
-      <p class="price">80 ر.س</p>
-      <a class="btn" href="https://wa.me/966500000000">اطلب الآن</a>
-    </div>
-    <div class="card">
-      <div class="img"></div>
-      <h3>منتج 3</h3>
-      <p class="price">120 ر.س</p>
-      <a class="btn" href="https://wa.me/966500000000">اطلب الآن</a>
-    </div>
-  </section>
+<nav>
+  <a href="#mobiles">موبايلات</a>
+  <a href="#headphones">سماعات</a>
+  <a href="#cases">كفرات</a>
+  <a href="#screens">لزقات</a>
+</nav>
 
-  <footer>© متجر نجمة</footer>
+<h2 id="mobiles">الموبايلات</h2>
+<section class="products">
+  <div class="card" data-name="موبايل 1"><div class="img"></div><h3>موبايل 1</h3><p class="price">000,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
+  <div class="card" data-name="موبايل 2"><div class="img"></div><h3>موبايل 2</h3><p class="price">000,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
+</section>
+
+<h2 id="headphones">السماعات</h2>
+<section class="products">
+  <div class="card" data-name="سماعة 1"><div class="img"></div><h3>سماعة 1</h3><p class="price">00,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
+  <div class="card" data-name="سماعة 2"><div class="img"></div><h3>سماعة 2</h3><p class="price">00,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
+</section>
+
+<h2 id="cases">الكفرات</h2>
+<section class="products">
+  <div class="card" data-name="كفر 1"><div class="img"></div><h3>كفر 1</h3><p class="price">0,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
+  <div class="card" data-name="كفر 2"><div class="img"></div><h3>كفر 2</h3><p class="price">0,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
+</section>
+
+<h2 id="screens">اللزقات</h2>
+<section class="products">
+  <div class="card" data-name="لزقة 1"><div class="img"></div><h3>لزقة 1</h3><p class="price">0,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
+  <div class="card" data-name="لزقة 2"><div class="img"></div><h3>لزقة 2</h3><p class="price">0,000 د.ع</p><a class="btn" href="#">اطلب الآن</a></div>
+</section>
+
+<footer>© متجر نجمة • للطلب والاستفسار واتساب: 07740866294</footer>
+
+<script>
+  var phone = "9647740866294";
+  document.querySelectorAll(".card").forEach(function (c) {
+    var msg = "مرحباً، أريد أطلب: " + c.dataset.name;
+    c.querySelector(".btn").href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+  });
+</script>
 </body>
 </html>
