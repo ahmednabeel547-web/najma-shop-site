@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>متجر نجمة</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #faf7f2; color: #222; }
+    header { background: #b5527f; color: #fff; text-align: center; padding: 40px 16px; }
+    header h1 { margin: 0 0 8px; }
+    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; padding: 20px; }
+    .card { background: #fff; border-radius: 12px; padding: 16px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,.1); }
+    .card .img { background: #eee; height: 120px; border-radius: 8px; margin-bottom: 10px; }
+    .price { color: #b5527f; font-weight: bold; }
+    a.btn { display: inline-block; margin-top: 8px; background: #25d366; color: #fff; padding: 8px 14px; border-radius: 8px; text-decoration: none; }
+    footer { text-align: center; padding: 20px; color: #777; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>متجر نجمة</h1>
+    <p>أهلاً بكم، تسوقوا أجمل المنتجات</p>
+  </header>
+
+  <section class="products">
+    <div class="card">
+      <div class="img"></div>
+      <h3>منتج 1</h3>
+      <p class="price">50 ر.س</p>
+      <a class="btn" href="https://wa.me/966500000000">اطلب الآن</a>
+    </div>
+    <div class="card">
+      <div class="img"></div>
+      <h3>منتج 2</h3>
+      <p class="price">80 ر.س</p>
+      <a class="btn" href="https://wa.me/966500000000">اطلب الآن</a>
+    </div>
+    <div class="card">
+      <div class="img"></div>
+      <h3>منتج 3</h3>
+      <p class="price">120 ر.س</p>
+      <a class="btn" href="https://wa.me/966500000000">اطلب الآن</a>
+    </div>
+  </section>
+
+  <footer>© متجر نجمة</footer>
+</body>
+</html>
