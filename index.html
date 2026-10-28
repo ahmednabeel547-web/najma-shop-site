@@ -4,50 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>متجر نجمة</title>
-<style>
-:root{--m:#b5527f;--l:#f3e3ec;--bg:#faf7f4;--r:#c0392b}
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#222}
-button,input{font-family:inherit;font-size:15px}
-button{border:0;border-radius:8px;padding:9px 12px;background:var(--m);color:#fff;cursor:pointer}
-button.red{background:var(--r)}
-button.gray{background:#ddd;color:#222}
-#land{position:fixed;inset:0;z-index:50;background:linear-gradient(160deg,#b5527f,#7d2f57);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px}
-#land svg{width:110px;height:110px}
-#land h1{margin:0;font-size:34px}
-#land button{width:250px;padding:14px;font-size:17px;background:#fff;color:var(--m);font-weight:bold}
-#land button.o{background:transparent;color:#fff;border:2px solid #fff}
-#land input{width:250px;padding:12px;border:0;border-radius:8px;text-align:center}
-#lf{display:none;flex-direction:column;gap:10px;align-items:center}
-#err{color:#ffd;min-height:20px}
-#app{display:none}
-header{background:var(--m);color:#fff;text-align:center;padding:16px 10px 12px}
-header h1{margin:0 0 6px}
-.bar{background:#222;color:#fff;padding:10px;display:none;gap:8px;flex-wrap:wrap;align-items:center}
-.top{display:flex;gap:8px;padding:10px;background:#fff;position:sticky;top:0;z-index:5;box-shadow:0 1px 6px #0002}
-.top input{flex:1;border:1px solid #ddd;border-radius:10px;padding:9px}
-nav{display:flex;gap:8px;overflow-x:auto;padding:10px;background:#fff}
-nav a{white-space:nowrap;background:var(--l);color:var(--m);padding:10px 16px;border-radius:20px;text-decoration:none}
-h2{margin:22px 16px 8px;color:var(--m)}
-.adm{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:6px 10px}
-.products{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:10px 16px}
-.card{background:#fff;border-radius:14px;padding:10px;text-align:center;box-shadow:0 1px 6px #0001}
-.img{height:150px;border-radius:10px;background:#eee center/contain no-repeat}
-.card h3{font-size:15px;margin:8px 0 4px}
-.price{color:var(--m);font-weight:bold;margin-bottom:6px}
-.row{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin-top:6px}
-.row button{padding:7px 9px;font-size:13px}
-.admin .bar{display:flex}
-#fab{position:fixed;bottom:16px;left:16px;z-index:10;border-radius:30px;padding:14px 18px;box-shadow:0 3px 10px #0004}
-#cart{position:fixed;inset:0;background:#0006;z-index:40;display:none}
-#cart>div{position:absolute;bottom:0;left:0;right:0;max-height:80%;overflow:auto;background:#fff;border-radius:18px 18px 0 0;padding:16px}
-.ci{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #eee}
-.ci b{flex:1}
-.empty{text-align:center;color:#888;padding:30px}
-footer{text-align:center;padding:24px;color:#888}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div id="land">
-  <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#fff"/>
+  <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#fff"/><path d="M50 16l9.5 21 23 2.5-17 15.5 5 22.5L50 65 29.5 77.5l5-22.5-17-15.5 23-2.5z" fill="#b5527f"/></svg>
+  <h1>متجر نجمة</h1>
+  <div>موبايلات • سماعات • كفرات • لواصق • كيبلات • شواحن</div>
+  <button onclick="enter('cust')">الدخول كزبون</button>
+  <button class="o" onclick="this.style.display='none';document.getElementById('lf').style.display='flex'">الدخول كمالك</button>
+  <div id="lf">
+    <input id="em" type="email" placeholder="البريد الإلكتروني" dir="ltr">
+    <input id="pw" type="password" placeholder="كلمة السر" dir="ltr">
+    <button onclick="ownerLogin()">دخول</button>
+  </div>
+  <div id="err"></div>
+</div>
+<div id="app">
+  <header><h1>متجر نجمة</h1><div>موبايلات • سماعات • كفرات • لواصق • كيبلات • شواحن</div></header>
+  <div class="bar"><b>وضع الإدارة</b><button onclick="addSec()">+ قسم</button><button class="gray" onclick="logout()">خروج</button></div>
+  <div class="top"><input id="q" type="search" placeholder="ابحث عن منتج..." oninput="render()"><button class="gray" id="cu" onclick="logout()">خروج</button></div>
+  <nav id="nav"></nav>
+  <div id="main"></div>
+  <footer>© متجر نجمة</footer>
+  <button id="fab" onclick="openCart()">🛒 العربة (<span id="cnt">0</span>)</button>
+</div>
+<div id="cart" onclick="if(event.target===this)this.style.display='none'"><div id="cbox"></div></div>
+<input type="file" id="file" accept="image/*" hidden>
+<script type="module" src="app.js"></script>
+</body>
+</html>
